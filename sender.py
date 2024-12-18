@@ -44,15 +44,17 @@ port = 54321
 
 s.connect(('127.0.0.1',port))
 
-input_string = input("Enter data you want to send -->")
+while True:
+    input_string = input("Enter data you want to send -->")
+    if input_string == "exit":
+        break
+    data = (''.join(format(ord(x),'b') for x in input_string))
+    print("Entered data in binary format --> "+data)
+    key = "1001"
 
-data = (''.join(format(ord(x),'b') for x in input_string))
-print("Entered data in binary format :"+data)
-key = "1001"
-
-ans = encodeData(data,key)
-print("Encoded data to be sent to receiver in binary format :",ans)
-s.sendto(ans.encode(),('127.0.0.1',54321))
-print("Received feedback from server :",s.recv(1024).decode())
+    ans = encodeData(data,key)
+    print("Encoded data to be sent to receiver in binary format --> ",ans)
+    s.sendto(ans.encode(),('127.0.0.1',54321))
+    print("Received feedback from server :",s.recv(1024).decode())
 
 s.close()

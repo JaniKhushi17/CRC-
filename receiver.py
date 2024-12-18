@@ -1,5 +1,6 @@
 import socket 
 
+# XOR function 
 def xor(a,b):
     result = []
     for i in range(1,len(b)):
@@ -11,6 +12,7 @@ def xor(a,b):
     return ''.join(result)
 
 
+# Division method 
 def mod2div(divident, divisor):
     pick = len(divisor)
     tmp = divident[0:pick]
@@ -31,7 +33,7 @@ def mod2div(divident, divisor):
     checkword = tmp
     return checkword
 
-
+# Decoding the data
 def decodeData(data,key):
     l_key = len(key)
     appended_data = data.decode() + '0'*(l_key-1)
@@ -55,7 +57,7 @@ while True:
     print('Got connection from', addr)
 
     data = c.recv(1024)
-    print("Received encoded data in binary format : ",data.decode())
+    print("Received encoded data in binary format--> ",data.decode())
 
     if not data:
         break
@@ -67,10 +69,10 @@ while True:
 
     temp = "0"*(len(key)-1)
     if ans == temp:
-        c.sendto(("THANK YOU DATA -->"+data.decode()+
-                 "Received no error found").encode(),('127.0.0.1',54321))
+        c.sendto(("Final Data -->"+data.decode()+
+                 " Received data --> NO ERROR FOUND ").encode(),('127.0.0.1',54321))
     else:
-        s.sendto(("Error in Data").encode(),('127.0.0.1'),54321)
+        s.sendto(("ERROR IN DATA").encode(),('127.0.0.1'),54321)
 
 
     c.close()
